@@ -87,6 +87,6 @@ gameStarterStartButton.addEventListener('click', () => {
             'vert',
         );
     } else if (nested && size) {
-        window.location.href = `/app/?nested=${nested}&size=${size}`;
+        window.location.href = `./app/?nested=${nested}&size=${size}`;
     }
 });
