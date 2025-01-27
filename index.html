@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNLIMTED Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="https://alphabrate.github.io/style.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="https://alb-cdn.web.app/popupjs/pu.min.css">
+
+
+</head>
+
+<body>
+    <h1>
+        <div class="center">
+            UNLIMTED
+        </div>
+        <table>
+            <tr>
+                <td>Tic</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Tac</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Toe</td>
+            </tr>
+        </table>
+    </h1>
+
+    <div class="video center">
+        <video src="assets/unlimted-tic-tac-toe-promotion.webm" autoplay loop muted playsinline>
+            <source src="assets/unlimted-tic-tac-toe-promotion.mp4" type="video/mp4">
+            <source src="assets/unlimted-tic-tac-toe-promotion.webm" type="video/webm">
+            Sorry, your browser doesn't support embedded videos.
+        </video>
+    </div>
+    <div class="space-holder"></div>
+    <div class="starter center flex-column">
+        <h2>Now, start your game.</h2>
+        <div class="input-group">
+            <span>
+                (
+            </span>
+            <input type="text" class="number" id="gameStarterSizeInputNumber" value="3" min="2" max="100">
+            <span>
+                ×
+            </span>
+            <input type="text" class="number" id="gameStarterSizeInputNumberAfter" value="3" min="2" max="100">
+            <span>
+                )
+            </span>
+            <input type="text" class="number power" id="gameStarterNestedInputNumber" value="2" min="2" max="100">
+        </div>
+        <button id="gameStarterStartButton" class="arrow-btn small">START NOW 💀</button>
+        <p class="color-gray smaller">We don't recommend a size greater than 9⁴ (9^4)
+            <br>
+            as your browser may not be able to handle it.
+
+        </p>
+    </div>
+
+    <div class="space-break" data-height="4"></div>
+    <div class="space-break hr" data-height="4"></div>
+    <div class="center single" id="footer-links">
+        <!-- Links Added by JS -->
+    </div>
+
+    <div class="center single">
+        <div class="footer" id="copyright">
+        </div>
+    </div>
+
+    <noscript>
+        <p>
+            <span class="sentence">We're sorry, but our website <span class="nowrap">requires JavaScript.</span></span>
+            <br>
+            <span class="sentence">Please enable it <span class="nowrap">in order to experience</span> the <span
+                    class="nowrap">elegance
+                    and simplicity.</span></span>
+        </p>
+        <style>
+            html {
+                overflow: hidden !important;
+            }
+        </style>
+    </noscript>
+
+    <script src="https://alb-cdn.web.app/popupjs/pu.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="https://alphabrate.github.io/js/index.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,303 @@
+/* General reset and base styles */
+:root {
+    color-scheme: light dark;
+
+    --color-background: light-dark(oklch(98% 0.02 260), oklch(20% 0 0));
+    --color-primary: light-dark(oklch(20% 0.05 260), oklch(1 0 0));
+    --color-secondary: light-dark(oklch(80% 0.05 260), oklch(30% 0 0));
+    --color-accent: light-dark(oklch(70% 0.2 145), oklch(70% 0.2 145));
+    --color-hover: light-dark(oklch(90% 0.05 260), oklch(30% 0.05 260));
+    --color-border: light-dark(oklch(0.85 0.01 263.53), #ffffff2e);
+    --color-white: light-dark(oklch(100% 0 0), oklch(10% 0 0));
+    --color-shadow: light-dark(oklch(0.1 0 0 / 0.10), oklch(1 0 0 / 0.10));
+
+    --invert: invert(0);
+    --easeInOutBack: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    --easeOutExpo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --invert: invert(1);
+    }
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+
+    overflow: hidden;
+}
+
+.hidden {
+    display: none;
+}
+
+.zoom-in-out,
+.zoom-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.zoom-in-out-animted {
+
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+
+    --size: 32px;
+
+    height: var(--size);
+    width: var(--size);
+
+    .border {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: var(--size);
+        height: var(--size);
+        border: 1px solid var(--color-primary);
+        border-radius: 7px;
+        box-sizing: border-box;
+        transition: .2s;
+        pointer-events: none;
+    }
+
+    .grid>span,
+    .cross>span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: var(--size);
+        height: var(--size);
+
+        * {
+            stroke: var(--color-primary) !important;
+        }
+    }
+
+    .grid,
+    .cross {
+        transition: .5s var(--easeInOutBack);
+        pointer-events: none;
+        position: absolute;
+
+        &,
+        * {
+            width: var(--size);
+            height: var(--size);
+        }
+    }
+
+    .grid {
+        opacity: 0;
+        transform: scale(.5);
+    }
+
+    .cross {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    &.zoom-in {
+        .grid {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .cross {
+            opacity: 0;
+            transform: scale(.5);
+        }
+    }
+
+    &.zoom-in:hover {
+        .grid {
+            transform: scale(.95);
+        }
+    }
+
+    &:not(.zoom-in):hover {
+        .cross {
+            transform: scale(.95);
+        }
+    }
+}
+
+.extra-settings * {
+    fill: var(--color-primary);
+}
+
+.controller {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: .2rem 2rem;
+    border: 1px solid var(--color-border);
+    border-radius: 11px;
+
+    backdrop-filter: blur(10px) saturate(80%);
+    -webkit-backdrop-filter: blur(10px) saturate(80%);
+
+    box-shadow: 0 0 10px 0 var(--color-shadow);
+
+    transition: bottom .5s var(--easeInOutBack), padding .5s var(--easeInOutBack);
+
+
+
+    .down {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+}
+
+@keyframes spinning {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.controller.setting-active {
+    bottom: 1rem !important;
+    padding: 0rem 1rem;
+
+    .extra-settings-toggle svg {
+        animation: spinning 50s infinite linear;
+    }
+}
+
+.current-player {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 26pt;
+    height: 24pt;
+    background-image: url(../assets/cross.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center .5pt;
+    filter: var(--invert);
+
+    cursor: not-allowed;
+}
+
+.extra-settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32pt;
+    width: 24pt;
+    transform: translateX(1pt);
+}
+
+.extra-settings .extra-settings-toggle,
+.extra-settings .extra-settings-toggle svg {
+    height: 22pt;
+    width: 22pt;
+
+    cursor: pointer;
+
+    transition: 1s var(--easeOutExpo);
+}
+
+.extra-settings .extra-settings-toggle svg:hover {
+    transform: rotate(-12deg);
+}
+
+.extra-settings-menu {
+    color: var(--color-primary);
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    padding-top: 0;
+    border-bottom: 0px solid transparent;
+
+    transition: 1s var(--easeOutExpo);
+
+    .extra-settings-menu-item {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 0.5rem;
+        height: 0;
+        padding: 0;
+        cursor: pointer;
+        overflow: hidden;
+        transition: height 0.5s var(--easeInOutBack), padding 0.5s var(--easeInOutBack);
+        border-bottom: 0px solid transparent;
+    }
+}
+
+.controller.setting-active .extra-settings-menu {
+    padding-top: 0.7rem;
+    padding-bottom: 0.2rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.controller.setting-active .extra-settings-menu .extra-settings-menu-item {
+    height: 1rem;
+    padding: .7rem;
+    border-bottom: 1px solid transparent;
+    transition: height 1s var(--easeOutExpo), padding 1s var(--easeOutExpo), transform 0.5s, border-bottom 0.5s;
+}
+
+.controller.setting-active .extra-settings-menu .extra-settings-menu-item:hover {
+    transform: scale(1.05);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.controller.setting-active .extra-settings-menu .extra-settings-menu-item:last-child {
+    border-bottom: 0px solid transparent;
+}
+
+.controller.setting-active .extra-settings-menu .extra-settings-menu-item:active {
+    transform: scale(.95);
+}
+
+
+.color-red {
+    color: #FF4F4F !important;
+    stroke: #FF4F4F !important;
+}
+
+.primary.stroke * {
+    stroke: var(--color-primary) !important;
+}
+
+.primary.fill * {
+    fill: var(--color-primary) !important;
+}
+
+.alert-icon>svg[width="0"] {
+    min-width: 0;
+    padding: 0;
+    margin-right: 0;
+}
