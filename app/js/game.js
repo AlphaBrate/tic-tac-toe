@@ -10,8 +10,6 @@ const stastics = {
     draw: 0
 };
 
-
-
 let moveCount = 0;
 
 const searchParams = new URLSearchParams(window.location.search);
@@ -305,8 +303,6 @@ function addGameLogic(deepest, nested, size) {
 
                     function next(parentBoard) {
                         if (checkWin(parentBoard, currentPlayer, size)) {
-                            console.log('win in parent board');
-
                             // add occupied to parent board
                             parentBoard.parentElement.dataset.occupied = currentPlayer;
 
@@ -323,7 +319,6 @@ function addGameLogic(deepest, nested, size) {
                             // if is body
                             if (parentCell.parentElement.parentElement.tagName === 'HTML') {
                                 pujs.alert(`Player ${currentPlayer} wins the whole game!`, 'success');
-                                console.log(`Player ${currentPlayer} wins the whole game!`);
                                 resetZoom(game);
                                 
                                 document.querySelector('.controller').classList.add('setting-active');
@@ -353,7 +348,6 @@ function addGameLogic(deepest, nested, size) {
 
                                 // add game logic
                                 addGameLogic(nextDeepest, nested, size);
-                                console.log(nextDeepest);
 
                                 setTimeout(() => {
                                     resetZoom(game).then(() => {
@@ -371,7 +365,6 @@ function addGameLogic(deepest, nested, size) {
                             }
 
                         } else {
-                            console.log('no win in parent board');
                             // check if it's a draw
                             const cells = parentBoard.querySelectorAll('&>.row>.cell');
                             let draw = true;
@@ -382,8 +375,6 @@ function addGameLogic(deepest, nested, size) {
                             });
 
                             if (draw) {
-                                console.log('draw in parent board');
-
                                 // add to statistics
 
                                 stastics.draw++;
@@ -401,7 +392,6 @@ function addGameLogic(deepest, nested, size) {
                                 // if is body
                                 if (parentCell.parentElement.parentElement.tagName === 'HTML') {
                                     pujs.alert('It\'s a draw!');
-                                    console.log('It\'s a draw!');
                                     resetZoom(game);
                                     return true;
                                 }

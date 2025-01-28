@@ -5,51 +5,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game</title>
-    <link rel="stylesheet" href="css/game.css">
+    <meta name="description" content="Play an interactive game with customizable settings and controls.">
+
+    <!-- External Stylesheets -->
     <link rel="stylesheet" href="https://alb-cdn.web.app/popupjs/pu.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/game.css">
 </head>
 
 <body>
+    <!-- Hidden Icon for Refresh -->
     <icon alt="Icon Refresh" class="hidden"></icon>
-    <div class="game"></div>
 
+    <!-- Game Container -->
+    <div class="game" role="main"></div>
+
+    <!-- Game Controller -->
     <div class="controller">
+        <!-- Upper Section: Extra Settings Menu -->
         <div class="up">
             <div class="extra-settings-menu">
-                <div class="action-setting-restart extra-settings-menu-item color-red">
+                <!-- Restart Game -->
+                <div class="action-setting-restart extra-settings-menu-item color-red" role="button" tabindex="0"
+                    aria-label="Restart Game">
                     <icon data-icon="bin" alt="Restart Game"></icon>
-
                     <div class="text">Restart Game</div>
                 </div>
 
-                <div class="action-setting-exit extra-settings-menu-item">
+                <!-- Leave Game -->
+                <div class="action-setting-exit extra-settings-menu-item" role="button" tabindex="0"
+                    aria-label="Leave Game">
                     <icon class="stroke primary" data-icon="exit" alt="Leave Game"></icon>
-
                     <div class="text">Leave Game</div>
                 </div>
 
-
-                <div class="action-setting-reset-board extra-settings-menu-item">
-                    <icon class="fill primary" data-icon="refresh" alt="Restart Game">
-                    </icon>
-
+                <!-- Reset Board -->
+                <div class="action-setting-reset-board extra-settings-menu-item" role="button" tabindex="0"
+                    aria-label="Reset Board">
+                    <icon class="fill primary" data-icon="refresh" alt="Reset Board"></icon>
                     <div class="text">Reset Board</div>
                 </div>
 
-                <div class="action-setting-other extra-settings-menu-item">
-                    <icon class="stroke fill primary" data-icon="dots" alt="Restart Game">
-                    </icon>
-
+                <!-- Other Settings -->
+                <div class="action-setting-other extra-settings-menu-item" role="button" tabindex="0"
+                    aria-label="Other Settings">
+                    <icon class="stroke fill primary" data-icon="dots" alt="Other Settings"></icon>
                     <div class="text">Other Settings</div>
                 </div>
             </div>
         </div>
+
+        <!-- Lower Section: Player Info, Zoom, and Extra Settings -->
         <div class="down">
-            <div class="current-player"></div>
+            <!-- Current Player Display -->
+            <div class="current-player" aria-live="polite"></div>
+
+            <!-- Zoom In/Out Toggle -->
             <div class="zoom-in-out">
                 <input type="checkbox" name="zoom-in-out" id="zoom-in-out-toggle" class="hidden">
-                <label for="zoom-in-out-toggle" class="zoom-toggle">
+                <label for="zoom-in-out-toggle" class="zoom-toggle" aria-label="Toggle Zoom">
                     <span class="zoom-in-out-animted" data-value="out">
                         <div class="container">
                             <div class="border"></div>
@@ -63,22 +77,24 @@
                     </span>
                 </label>
             </div>
-            <div class="extra-settings">
+
+            <!-- Extra Settings Toggle -->
+            <div class="extra-settings" role="button" tabindex="0" aria-label="Extra Settings">
                 <div class="extra-settings-toggle">
-                    <icon data-icon="settings" alt="settings"></icon>
+                    <icon data-icon="settings" alt="Settings"></icon>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- External Scripts -->
     <script src="https://alb-cdn.web.app/popupjs/pu.min.js"></script>
     <script>
         pujs.setup.icons_path = '../app/assets/';
         pujs.setup.init();
     </script>
-    <script src="js/game.js"></script>
-    <script src="js/app.js"></script>
-
+    <script src="js/game.js" defer></script>
+    <script src="js/app.js" defer></script>
 </body>
 
 </html>

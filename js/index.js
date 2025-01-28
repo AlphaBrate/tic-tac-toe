@@ -1,92 +1,99 @@
-//
-
 // Game Starter
-const
-    gameStarterNestedInputNumber = document.querySelector('#gameStarterNestedInputNumber'),
-    gameStarterSizeInputNumber = document.querySelector('#gameStarterSizeInputNumber'),
-    gameStarterSizeInputNumberAfter = document.querySelector('#gameStarterSizeInputNumberAfter'),
-    gameStarterStartButton = document.querySelector('#gameStarterStartButton');
-/*
- * Game
- * 1. Nested:
- *    For example, if nested is 2, players will have one more tic-tac-toe board inside each main board square.
- * 2. Size:
- *    For example, if size is 3, players will have 3x3 tic-tac-toe boards.
+const gameStarterNestedInputNumber = document.querySelector('#gameStarterNestedInputNumber');
+const gameStarterSizeInputNumber = document.querySelector('#gameStarterSizeInputNumber');
+const gameStarterSizeInputNumberAfter = document.querySelector('#gameStarterSizeInputNumberAfter');
+const gameStarterStartButton = document.querySelector('#gameStarterStartButton');
+
+/**
+ * Validate and sync input values.
+ * Ensures only single-digit numbers are allowed and syncs the two size inputs.
+ * @param {HTMLInputElement} input - The input element to validate.
+ * @param {HTMLInputElement} syncInput - The input element to sync with.
  */
-// Always keep gameStarterSizeInputNumberAfter and gameStarterSizeInputNumber in sync
-gameStarterSizeInputNumber.addEventListener('input', () => {
-    // receive only one digit of number
+const validateAndSyncInput = (input, syncInput) => {
+    let value = input.value;
 
-    let value = gameStarterSizeInputNumber.value;
-    // check if number, if not, remove last character
+    // Remove non-numeric characters
     if (isNaN(value)) {
-        gameStarterSizeInputNumber.value = value.slice(0, -1);
+        input.value = value.slice(0, -1);
+        return;
     }
 
-    // shift is not pressed and value is longer than 1
+    // Ensure only one digit is entered
     if (value.length > 1) {
-        // remove the first character
-        gameStarterSizeInputNumber.value = value.slice(1);
+        input.value = value.slice(-1); // Keep only the last character
     }
 
-    gameStarterSizeInputNumberAfter.value = gameStarterSizeInputNumber.value;
+    // Sync the other input
+    syncInput.value = input.value;
+};
+
+/**
+ * Handle nested input validation.
+ * Ensures only single-digit numbers are allowed.
+ * @param {HTMLInputElement} input - The input element to validate.
+ */
+const validateNestedInput = (input) => {
+    let value = input.value;
+
+    // Remove non-numeric characters
+    if (isNaN(value)) {
+        input.value = value.slice(0, -1);
+        return;
+    }
+
+    // Ensure only one digit is entered
+    if (value.length > 1) {
+        input.value = value.slice(-1); // Keep only the last character
+    }
+};
+
+/**
+ * Start the game with the selected parameters.
+ * Displays a warning if the nested value is too high.
+ */
+const startGame = () => {
+    const nested = gameStarterNestedInputNumber.value;
+    const size = gameStarterSizeInputNumber.value;
+
+    if (!nested || !size) {
+        return; // Exit if inputs are empty
+    }
+
+    if ((size * size) ** nested > 6000) {
+        pujs.popup(
+            'It\'s too much!',
+            `Your browser may not be able to handle ${size*size}^${nested} nested boards.`,
+            [
+                {
+                    text: 'Continue Anyway',
+                    callback: () => {
+                        window.location.href = `./app/?nested=${nested}&size=${size}`;
+                    },
+                    color: 'var(--pu-red)'
+                },
+                {
+                    text: 'Cancel'
+                }
+            ],
+            'vert'
+        );
+    } else {
+        window.location.href = `./app/?nested=${nested}&size=${size}`;
+    }
+};
+
+// Event Listeners
+gameStarterSizeInputNumber.addEventListener('input', () => {
+    validateAndSyncInput(gameStarterSizeInputNumber, gameStarterSizeInputNumberAfter);
 });
 
 gameStarterSizeInputNumberAfter.addEventListener('input', () => {
-    // receive only one digit of number
-
-    let value = gameStarterSizeInputNumberAfter.value;
-    // check if number, if not, remove last character
-    if (isNaN(value)) {
-        gameStarterSizeInputNumberAfter.value = value.slice(0, -1);
-    }
-
-    // shift is not pressed and value is longer than 1
-
-    if (value.length > 1) {
-        // remove the first character
-        gameStarterSizeInputNumber.value = value.slice(1);
-    }
-
-    gameStarterSizeInputNumber.value = gameStarterSizeInputNumberAfter.value;
+    validateAndSyncInput(gameStarterSizeInputNumberAfter, gameStarterSizeInputNumber);
 });
 
 gameStarterNestedInputNumber.addEventListener('input', () => {
-    // receive only one digit of number
-
-    let value = gameStarterNestedInputNumber.value;
-    // check if number, if not, remove last character
-    if (isNaN(value)) {
-        gameStarterNestedInputNumber.value = value.slice(0, -1);
-    }
-
-    // shift is not pressed and value is longer than 1
-    if (value.length > 1) {
-        // remove the first character
-        gameStarterNestedInputNumber.value = value.slice(1);
-    }
+    validateNestedInput(gameStarterNestedInputNumber);
 });
 
-gameStarterStartButton.addEventListener('click', () => {
-    const nested = gameStarterNestedInputNumber.value,
-        size = gameStarterSizeInputNumber.value;
-
-    if (nested > 4) {
-        pujs.popup('It\'s too much!',
-            `Your browser may not be able to handle ${nested} nested boards.`,
-            [{
-                text: 'Continue Anyway',
-                callback: function () {
-                    window.location.href = `./app/?nested=${nested}&size=${size}`;
-                },
-                color: 'var(--pu-red)'
-            },
-            {
-                text: 'Cancel'
-            }],
-            'vert',
-        );
-    } else if (nested && size) {
-        window.location.href = `./app/?nested=${nested}&size=${size}`;
-    }
-});
+gameStarterStartButton.addEventListener('click', startGame);

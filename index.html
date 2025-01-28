@@ -4,21 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNLIMTED Tic-Tac-Toe</title>
+    <title>REAL UNLIMITED Tic-Tac-Toe</title>
+    <meta name="description" content="Play unlimited Tic-Tac-Toe with customizable grid sizes!">
+
+    <!-- External Stylesheets -->
     <link rel="stylesheet" href="https://alphabrate.github.io/style.css">
     <link rel="stylesheet" href="css/style.css">
-
     <link rel="stylesheet" href="https://alb-cdn.web.app/popupjs/pu.min.css">
-
-
 </head>
 
 <body>
-    <h1>
-        <div class="center">
-            UNLIMTED
-        </div>
-        <table>
+    <header>
+        <h1 class="center">UNLIMITED Tic-Tac-Toe</h1>
+    </header>
+
+    <main>
+        <!-- Game Title Grid -->
+        <table aria-label="Tic-Tac-Toe Title Grid">
             <tr>
                 <td>Tic</td>
                 <td></td>
@@ -35,58 +37,57 @@
                 <td>Toe</td>
             </tr>
         </table>
-    </h1>
 
-    <div class="video center">
-        <video src="assets/unlimted-tic-tac-toe-promotion.webm" autoplay loop muted playsinline>
-            <source src="assets/unlimted-tic-tac-toe-promotion.mp4" type="video/mp4">
-            <source src="assets/unlimted-tic-tac-toe-promotion.webm" type="video/webm">
-            Sorry, your browser doesn't support embedded videos.
-        </video>
-    </div>
-    <div class="space-holder"></div>
-    <div class="starter center flex-column">
-        <h2>Now, start your game.</h2>
-        <div class="input-group">
-            <span>
-                (
-            </span>
-            <input type="text" class="number" id="gameStarterSizeInputNumber" value="3" min="2" max="100">
-            <span>
-                ×
-            </span>
-            <input type="text" class="number" id="gameStarterSizeInputNumberAfter" value="3" min="2" max="100">
-            <span>
-                )
-            </span>
-            <input type="text" class="number power" id="gameStarterNestedInputNumber" value="2" min="2" max="100">
+        <!-- Promotional Video -->
+        <div class="video center">
+            <video autoplay loop muted playsinline aria-label="Promotional video for Unlimited Tic-Tac-Toe">
+                <source src="assets/unlimted-tic-tac-toe-promotion.mp4" type="video/mp4">
+                <source src="assets/unlimted-tic-tac-toe-promotion.webm" type="video/webm">
+                Your browser does not support the video tag.
+            </video>
         </div>
-        <button id="gameStarterStartButton" class="arrow-btn small">START NOW 💀</button>
-        <p class="color-gray smaller">We don't recommend a size greater than 9⁴ (9^4)
-            <br>
-            as your browser may not be able to handle it.
 
-        </p>
-    </div>
+        <!-- Game Starter Section -->
+        <section class="starter center flex-column">
+            <h2>Now, start your game.</h2>
+            <div class="input-group">
+                <span>(</span>
+                <input type="text" class="number" id="gameStarterSizeInputNumber" value="3" min="2" max="100"
+                    aria-label="Grid width">
+                <span>×</span>
+                <input type="text" class="number" id="gameStarterSizeInputNumberAfter" value="3" min="2" max="100"
+                    aria-label="Grid height">
+                <span>)</span>
+                <input type="text" class="number power" id="gameStarterNestedInputNumber" value="2" min="2" max="100"
+                    aria-label="Nested grid power">
+            </div>
+            <button id="gameStarterStartButton" class="arrow-btn small" aria-label="Start game">START NOW 💀</button>
+            <p class="color-gray smaller">
+                We don't recommend a size greater than 9⁴ (9^4) as your browser may not be able to handle it.
+            </p>
+        </section>
 
-    <div class="space-break" data-height="4"></div>
-    <div class="space-break hr" data-height="4"></div>
-    <div class="center single" id="footer-links">
-        <!-- Links Added by JS -->
-    </div>
+        <!-- Footer Section -->
+        <footer>
+            <div class="space-break hr" data-height="4"></div>
+            <div class="center single" id="footer-links">
+                <!-- Links Added by JS -->
+            </div>
+            <div class="center single">
+                <div class="footer" id="copyright">
+                    <!-- Copyright information -->
+                </div>
+            </div>
+        </footer>
+    </main>
 
-    <div class="center single">
-        <div class="footer" id="copyright">
-        </div>
-    </div>
-
+    <!-- Noscript Fallback -->
     <noscript>
-        <p>
+        <p class="center">
             <span class="sentence">We're sorry, but our website <span class="nowrap">requires JavaScript.</span></span>
             <br>
-            <span class="sentence">Please enable it <span class="nowrap">in order to experience</span> the <span
-                    class="nowrap">elegance
-                    and simplicity.</span></span>
+            <span class="sentence">Please enable it <span class="nowrap">to experience</span> the <span
+                    class="nowrap">elegance and simplicity.</span></span>
         </p>
         <style>
             html {
@@ -95,10 +96,10 @@
         </style>
     </noscript>
 
-    <script src="https://alb-cdn.web.app/popupjs/pu.min.js"></script>
-    <script src="js/index.js"></script>
-    <script src="https://alphabrate.github.io/js/index.js"></script>
-
+    <!-- External Scripts -->
+    <script src="https://alb-cdn.web.app/popupjs/pu.min.js" defer></script>
+    <script src="js/index.js" defer></script>
+    <script src="https://alphabrate.github.io/js/index.js" defer></script>
 </body>
 
 </html>
