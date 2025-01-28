@@ -198,4 +198,4 @@ This project is licensed under the APEL License. See the `LICENSE` file for deta
 
 **Enjoy playing UNLIMITED Tic-Tac-Toe! 🎮**
 
-(C) 2025 AlphaBrate.
+Copyright © 2025 AlphaBrate.
